@@ -29,9 +29,9 @@ let {
   search,
 } = require("../controllers/listings.js");
 
-// Router.get("/listing/",(req,res)=>{
-//     res.redirect("/listing/listing")
-// })
+Router.get("/", (req, res) => {
+  res.redirect("/listing");
+});
 
 Router.route("/listing/").get(WrapAsync(index)).post(
   upload.single("listing[image]"),

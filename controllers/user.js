@@ -9,7 +9,7 @@ module.exports.signpostt = async (req, res) => {
     let { username, email, password } = req.body;
     let newUser = new User({ email, username });
     let done = await User.register(newUser, password);
-    console.log(done);
+    // console.log(done);
     req.login(done, (err) => {
       if (err) {
         next(err);

@@ -25,7 +25,7 @@ module.exports.revdelete = async (req, res) => {
 
   await listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
   await review.findByIdAndDelete(reviewId).then((data) => {
-    console.log(data);
+    // console.log(data);
   });
   req.flash("success", " Review Deleted ");
   res.redirect(`/listings/${id}`);

@@ -1,0 +1,37 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+    <br><br>
+    <h2>Create New Listing</h2>
+    <div class="row" style="width: 100%;font-size: 20px;">
+        <div class="col-8 offset-2">
+    <form method="post" action="/listing"  class="needs-validation" novalidate enctype="multipart/form-data" >
+        <div class="mb-3" ><label for="title" class="form-label" >Title :</label>
+        <input type="text" placeholder="enter title" name="listing[title]" class="form-control" required/>
+        <div class="valid-feedback" >gud !!</div>
+        <div class="invalid-feedback" >Enter valid details</div>
+        </div>
+        <div class="mb-3" ><label for="description" class="form-label" >description :</label>
+        <textarea name="listing[description]" placeholder="enter description"  class="form-control" required></textarea>
+        <div class="invalid-feedback" >Enter valid details</div>
+        </div>
+        <div class="mb-3" ><label for="image" class="form-label" >Upload Listing Image</label>
+        <input type="file"  name="listing[image]" class="form-control"  ></div>
+        <div class="row">
+        <div class="mb-3 col-4" ><label for="price" class="form-label" >price :</label>
+        <input name="listing[price]" type="number" placeholder="enter price" class="form-control" required/>
+        <div class="invalid-feedback" >Enter valid details</div>
+        </div>
+        <div class="mb-3 col-8" ><label for="country" class="form-label" >country :</label>
+        <input type="text" name="listing[country]" placeholder="enter country" class="form-control" required/>
+        <div class="invalid-feedback" >Enter valid details</div>
+        </div>
+        </div>
+        <div class="mb-3" ></div><label for="location" class="form-label" >location :</label>
+        <input type="text" name="listing[location]" placeholder="enter location" class="form-control" required/>
+        <div class="invalid-feedback" >Enter valid details</div>
+        <br><br><button class="btn btn-dark add-btn" type="submit">Add</button></div>
+        
+    </form>
+</div>
+</div>
+</body>

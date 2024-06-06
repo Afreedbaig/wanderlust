@@ -33,7 +33,7 @@ module.exports.index = async (req, res) => {
   //     geometry: cord.body.features[0].geometry,
   //   });
   // }
-  console.log("No of listings :", data.length);
+  // console.log("No of listings :", data.length);
   res.render("listings/index.ejs");
 };
 
@@ -59,7 +59,7 @@ module.exports.postt = async (req, res) => {
   // location: data.location,
   // country: data.country,
   // })
-  // await New.save().then(console.log("ok"))
+  await New.save();
   // Easy method
 
   data = req.body.listing;
@@ -72,9 +72,9 @@ module.exports.postt = async (req, res) => {
   data.geometry = cord.body.features[0].geometry;
   data.owner = `${req.user.username}`;
   data.image = { url: `${req.file.path}`, filename: `${req.file.filename}` };
-  console.log(data);
+  // console.log(data);
   await new listing(data).save().then(() => {
-    console.log("okok");
+    // console.log("okok");
   });
   req.flash("success", "New Listing Created");
   res.redirect("/listing");
@@ -109,11 +109,11 @@ module.exports.patchh = async (req, res) => {
   id = req.params;
   // console.log(req.body.listing)
   let data = req.body.listing;
-  console.log(req.file);
+  // console.log(req.file);
   if (Boolean(req.file)) {
     data.image = { url: `${req.file.path}`, filename: `${req.file.filename}` };
     await listing.findByIdAndUpdate(`${id.id}`, data).then(() => {
-      console.log("hiii");
+      // console.log("hiii");
     });
   } else {
     data1 = await listing.findById(`${id.id}`);

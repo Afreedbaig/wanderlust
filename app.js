@@ -81,8 +81,7 @@ app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", UserRouter);
 app.use((req, res, next) => {
   let err = { statusCode: 404, message: "page not found" };
-  // res.status(statusCode).send(message)
-  //   res.status(statusCode);
+
   res.render("error.ejs", { err });
 });
 
@@ -101,18 +100,7 @@ main()
 app.all("*", (err, req, res, next) => {
   err = new ExpressError(404, "page not found");
   next(err);
-  // res.send(err.name);
 });
-
-// app.use((err,req,res,next)=>{
-//     console.log(err.name)
-//     next(err)
-// })
-
-// app.use((err,req,res,next)=>{
-//     let {status=404,message = "some err"} = err
-//     res.status(status).send(message)
-// })
 
 app.listen(8080, () => {
   console.log("server is listining to port 8080");

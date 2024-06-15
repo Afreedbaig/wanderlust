@@ -15,20 +15,24 @@ module.exports.neww = (req, res) => {
 };
 
 module.exports.postt = async (req, res) => {
-  data = req.body.listing;
-  let cord = await geocodingClient
-    .forwardGeocode({
-      query: data.location,
-      limit: 1,
-    })
-    .send();
-  data.geometry = cord.body.features[0].geometry;
-  data.owner = `${req.user.username}`;
-  data.image = { url: `${req.file.path}`, filename: `${req.file.filename}` };
-  console.log(data);
-  await new listing(data).save().then(() => {});
-  req.flash("success", "New Listing Created");
-  res.redirect("/listing");
+  try {
+    data = req.body.listing;
+    let cord = await geocodingClient
+      .forwardGeocode({
+        query: data.location,
+        limit: 1,
+      })
+      .send();
+    data.geometry = cord.body.features[0].geometry;
+    data.owner = `${req.user.username}`;
+    data.image = { url: `${req.file.path}`, filename: `${req.file.filename}` };
+    console.log(data);
+    await new listing(data).save().then(() => {});
+    req.flash("success", "New Listing Created");
+    res.redirect("/listing");
+  } catch (e) {
+    res.send(e);
+  }
 };
 
 module.exports.editt = async (req, res) => {

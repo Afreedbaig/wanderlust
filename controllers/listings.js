@@ -87,17 +87,22 @@ module.exports.deletelistings = async (req, res) => {
 module.exports.search = async (req, res) => {
   let { data } = req.body;
   let titlesdata = await listing.find();
-  let titles = [];
+  let titles = "";
   for (i of titlesdata) {
-    titles.push(i.title);
-  }
-  for (i of titles) {
-    if (i.toUpperCase() == data.toUpperCase()) {
-      let found = await listing.findOne({ title: i });
-      let id = found._id;
-      return res.redirect(`/listings/${id}`);
+    if (i.title.toUpperCase() == data.toUpperCase()) {
+      titles = i._id;
     }
   }
+  if (titles) {
+    return res.redirect(`/listings/${titles}`);
+  }
+  // for (i of titles) {
+  //   if (i.toUpperCase() == data.toUpperCase()) {
+  //     let found = await listing.findOne({ title: i });
+  //     let id = found._id;
+  //     return res.redirect(`/listings/${id}`);
+  //   }
+  // }
   req.flash("error", "listing with that title does not exists!!");
   return res.redirect("/listing");
 };
